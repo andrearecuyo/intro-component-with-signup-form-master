@@ -13,14 +13,17 @@ function validateForm() {
 
   const firstNameEmpty = firstName == "" || firstName == null;
   const lastNameEmpty = lastName == "" || lastName == null;
-  const emailEmpty = email.includes('@');
+  const emailEmpty = email == "" || email == null;
+  const notEmail = email.includes('@');
   const passwordEmpty = password == "" || password == null;
 
   if (firstNameEmpty || lastNameEmpty || emailEmpty || passwordEmpty) {
     firstNameErrorMessage = "First Name cannot be empty";
     lastNameErrorMessage = "Last Name cannot be empty";
-    emailErrorMessage = "Looks like this is not an email";
+    emailErrorMessage = "Email cannot be empty";
     passwordErrorMessage = "Password cannot be empty";
+  } else if (notEmail) {
+    emailErrorMessage = "Looks like this is not an email";
   } else {
     null
   }
