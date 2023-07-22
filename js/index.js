@@ -1,35 +1,63 @@
-function validateForm() {
-  // Get the value of the input field with id=""
-  let firstName = document.getElementById("firstName").value;
-  let lastName = document.getElementById("lastName").value;
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
+// Get the form element
+const form = document.getElementById("form");
 
-  // If value is empty
-  let firstNameErrorMessage;
-  let lastNameErrorMessage;
-  let emailErrorMessage;
-  let passwordErrorMessage;
+// Event listener for form submission
+form.addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent form submission if validation fails
 
-  const firstNameEmpty = firstName == "" || firstName == null;
-  const lastNameEmpty = lastName == "" || lastName == null;
-  const emailEmpty = email == "" || email == null;
-  const notEmail = email.includes('@');
-  const passwordEmpty = password == "" || password == null;
+  // Get the error message containers for each input
+  const firstNameError = document.getElementById("firstNameError");
+  const lastNameError = document.getElementById("lastNameError");
+  const emailError = document.getElementById("emailError");
+  const passwordError = document.getElementById("passwordError");
 
-  if (firstNameEmpty || lastNameEmpty || emailEmpty || passwordEmpty) {
-    firstNameErrorMessage = "First Name cannot be empty";
-    lastNameErrorMessage = "Last Name cannot be empty";
-    emailErrorMessage = "Email cannot be empty";
-    passwordErrorMessage = "Password cannot be empty";
-  } else if (notEmail) {
-    emailErrorMessage = "Looks like this is not an email";
-  } else {
-    null
+  // Clear previous error messages
+  firstNameError.innerHTML = "";
+  lastNameError.innerHTML = "";
+  emailError.innerHTML = "";
+  passwordError.innerHTML = "";
+
+  // Validate each input field
+  const firstName = document.getElementById("firstName");
+  const lastName = document.getElementById("lastName");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+
+  let errors = [];
+
+  if (firstName.value.trim() === "") {
+    errors.push("First Name cannot be empty");
+    firstNameError.innerHTML = "First Name cannot be empty";
+    firstName.focus();
   }
-  document.getElementById("firstNameError").innerHTML = firstNameErrorMessage;
-  document.getElementById("lastNameError").innerHTML = lastNameErrorMessage;
-  document.getElementById("emailError").innerHTML = emailErrorMessage;
-  document.getElementById("passwordError").innerHTML = passwordErrorMessage;
 
-}
+  if (lastName.value.trim() === "") {
+    errors.push("Last Name cannot be empty");
+    lastNameError.innerHTML = "Last Name cannot be empty";
+    lastName.focus();
+  }
+
+  if (email.value.trim() === "") {
+    errors.push("Email cannot be empty");
+    emailError.innerHTML = "Email cannot be empty";
+    email.focus();
+  } else if (!email.includes('@')) {
+    errors.push("Looks like this is not an email");
+    emailError.innerHTML = "Looks like this is not an email";
+    email.focus();
+  }
+
+  if (password.value.trim() === "") {
+    errors.push("Password cannot be empty");
+    passwordError.innerHTML = "Password cannot be empty";
+    password.focus();
+  }
+
+  // Display error messages or submit the form
+  if (errors.length > 0) {
+    return;
+  } else {
+    // Display a success message to the user
+    alert("Form submitted successfully!");
+  }
+})

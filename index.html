@@ -18,7 +18,7 @@
   
         <section class="form-section">
           <button type="button" class="btn-offer"><b>Try it free 7 days</b> then $20/mo. thereafter</button>
-          <form novalidate>
+          <form id="form">
             <div>
               <input type="text" name="firstName" id="firstName" placeholder="First Name"> 
               <p id="firstNameError"></p>
@@ -36,7 +36,7 @@
               <p id="passwordError"></p>
             </div>
             
-            <button type="button" value="Submit" onclick="validateForm()">Claim your free trial </button>
+            <button type="submit" value="Submit">Claim your free trial </button>
   
             <span>By clicking the button, you are agreeing to our 
               <a href="#">Terms and Services</a>
